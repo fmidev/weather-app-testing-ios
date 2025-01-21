@@ -1,0 +1,1 @@
+FORECAST_TABLE_BUTTON_NAME = 'forecast_table_button'

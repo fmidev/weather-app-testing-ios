@@ -1,0 +1,6 @@
+*.html
+*.xml
+*.pyc
+.venv/
+.idea/
+.DS_Store/
