@@ -1,0 +1,20 @@
+name: iOS Robot Framework CI / CD Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clone-repository:
+    runs-on: macos-latest
+
+    steps:
+      # Step 1: Checkout the current repository
+      - name: Checkout Current Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Clone another repository
+      - name: Clone Another Repository
+        run: |
+          git clone https://github.com/fmidev/weather-app.git
+          cd weather-app/ios
+          echo "Repository cloned successfully"
