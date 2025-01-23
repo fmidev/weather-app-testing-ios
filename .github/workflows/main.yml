@@ -37,7 +37,6 @@ jobs:
       - name: Clone Weather App Repository
         run: |
           git clone https://github.com/fmidev/weather-app.git
-#          cd weather-app/ios
           echo "Repository cloned successfully"
 
       # Step 6: Install Yarn
