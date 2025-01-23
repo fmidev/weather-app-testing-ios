@@ -37,19 +37,16 @@ jobs:
       - name: Clone Weather App Repository
         run: |
           git clone https://github.com/fmidev/weather-app.git
-          cd weather-app/ios
+#          cd weather-app/ios
           echo "Repository cloned successfully"
 
       # Step 6: Install Yarn
       - name: Install Yarn
-        run: |
-          yarn install
-        working-directory: weather-app
+        run: yarn install
 
       # Step 7: Install Pods
       - name: Install Pods
-        run: |
-          pod install
+        run: pod install
         working-directory: ios
 
       # Step 8: Get defaultConfig
@@ -60,4 +57,3 @@ jobs:
         run: |
           touch defaultConfig.ts
           echo "$defaultConfig" >> defaultConfig.ts
-        
