@@ -6,4 +6,4 @@ CONFIG_DEVICE_NAME = 'iPhone 16 Pro'
 CONFIG_APPIUM_SERVER_URL = 'http://127.0.0.1:4723/wd/hub'
 
 # Yarn config variables
-CONFIG_YARN_PATH = '//Users//runner//work//weather-app-testing-ios//weather-app-testing-ios//weather-app//'
+CONFIG_YARN_PATH = '//Users//runner//work//weather-app-testing-ios//weather-app-testing-ios//weather-app'
