@@ -33,10 +33,31 @@ jobs:
           npm install -g appium-doctor
           appium-doctor --ios # Check Appium setup
 
-      # Step 5: Clone another repository
-      - name: Clone Another Repository
+      # Step 5: Clone repository
+      - name: Clone Weather App Repository
         run: |
           git clone https://github.com/fmidev/weather-app.git
           cd weather-app/ios
           echo "Repository cloned successfully"
-          
+
+      # Step 6: Install Yarn
+      - name: Install Yarn
+        run: |
+          yarn install
+        working-directory: weather-app
+
+      # Step 7: Install Pods
+      - name: Install Pods
+        run: |
+          pod install
+        working-directory: ios
+
+      # Step 8: Get defaultConfig
+      - name: Get defaultConfig
+        env:
+          defaultConfig: ${{ secrets.DEFAULTCONFIG }}
+        shell: bash
+        run: |
+          touch defaultConfig.ts
+          echo "$defaultConfig" >> defaultConfig.ts
+        
