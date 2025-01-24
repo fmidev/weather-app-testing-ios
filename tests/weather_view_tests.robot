@@ -22,6 +22,7 @@ Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefull
 
 *** Test Cases ***
 Verify 10-day Forecast Table View Elements
+    Set Log Level    TRACE
     Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
     Open Weather View
     Open Search View
