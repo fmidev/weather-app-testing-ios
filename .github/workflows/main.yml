@@ -62,7 +62,7 @@ jobs:
       # Step 9: Run Robot Framework tests
       - name: Run Robot Framework Tests
         run: |
-          robot -d output tests/weather_view_tests.robot
+          robot -d results tests/weather_view_tests.robot
         continue-on-error: true
 
       # Step 10: Upload artifact
