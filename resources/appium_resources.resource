@@ -10,7 +10,7 @@ Set Appium Capabilities
 
 Start Appium Server
     Start Process    appium --base-path /wd/hub/    shell=yes    stdout=DEVNULL    stderr=DEVNULL    alias=appium_server_process
-    Wait For Process    appium_server_process    timeout=20 seconds
+    Wait For Process    appium_server_process    timeout=30 seconds
     Process Should Be Running    appium_server_process
 
 Stop Appium Server

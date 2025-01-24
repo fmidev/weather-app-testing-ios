@@ -9,7 +9,11 @@ Stop Yarn
     Process Should Be Stopped    yarn_process
 
 Start Simulator
-    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME}"    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
+    ${path_before_simulator_start}=    Run Process    pwd
+    Log    ${path_before_simulator_start.stdout}
+    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME}"    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
+    ${path_after_simulator_start}=    Run Process    pwd
+    Log    ${path_after_simulator_start.stdout}
     Wait For Process    simulator_process    timeout=90
     Process Should Be Running    simulator_process
 
