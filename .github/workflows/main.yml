@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Current Repository
         uses: actions/checkout@v3
 
+      - name: Check XCode Version
+        run: xcodebuild --version
+
       # Step 2: Install Python
       - name: Set up Python
         uses: actions/setup-python@v4
