@@ -4,19 +4,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  clone-repository:
+  run-robot-framework-appium-ios-tests:
     runs-on: macos-latest
+
+    strategy:
+      # Node version matrix
+      matrix:
+        node-version: [22.11.0]
 
     steps:
       # Step 1: Checkout the current repository
-      - name: Checkout Current Repository
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Setup node
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      # Select Xcode version
+      - name: Select Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
 
       - name: Check XCode Version
         run: /usr/bin/xcodebuild -version
 
       - name: Install Xcode Command Line Tools
         run: sudo xcode-select --install || echo "Command line tools already installed"
+
+      - name: Check Node Version
+        run: node -v
 
       # Step 2: Install Python
       - name: Set up Python
