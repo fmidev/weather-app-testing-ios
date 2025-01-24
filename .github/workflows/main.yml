@@ -15,6 +15,9 @@ jobs:
       - name: Check XCode Version
         run: /usr/bin/xcodebuild -version
 
+      - name: Install Xcode Command Line Tools
+        run: sudo xcode-select --install || echo "Command line tools already installed"
+
       # Step 2: Install Python
       - name: Set up Python
         uses: actions/setup-python@v4
