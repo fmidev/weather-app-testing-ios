@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check XCode Version
-        run: xcodebuild --version
+        run: /usr/bin/xcodebuild -version
 
       # Step 2: Install Python
       - name: Set up Python
