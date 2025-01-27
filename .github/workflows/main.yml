@@ -40,9 +40,6 @@ jobs:
       - name: Check npm version
         run: npm -v
 
-      - name: List Punycode
-        run: npm ls punycode
-
       - name: List available Simulators
         run: xcrun simctl list devices
 
