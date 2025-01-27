@@ -95,6 +95,9 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
+      - name: Run React-native Doctor
+        run: react-native doctor
+
       # Step 9: Run Robot Framework tests
       - name: Run Robot Framework Tests
         run: |
@@ -103,7 +106,7 @@ jobs:
 
       # Step 10: Upload artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: robot-test-results
           path: |
