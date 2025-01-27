@@ -10,16 +10,16 @@ jobs:
     strategy:
       # Node version matrix
       matrix:
-        node-version: [22.11.0]
+        node-version: [20]
 
     steps:
       # Step 1: Checkout the current repository
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       # Setup node
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           # cache: 'yarn'
@@ -36,6 +36,12 @@ jobs:
 
       - name: Check Node Version
         run: node -v
+
+      - name: Check npm version
+        run: npm -v
+
+      - name: List Punycode
+        run: npm ls punycode
 
       - name: List available Simulators
         run: xcrun simctl list devices
@@ -97,7 +103,7 @@ jobs:
 
       # Step 10: Upload artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: robot-test-results
           path: |
