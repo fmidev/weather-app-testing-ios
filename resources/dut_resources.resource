@@ -12,7 +12,7 @@ Start Simulator
     ${path_before_simulator_start}=    Run Process    pwd
     Log    ${path_before_simulator_start.stdout}
 #    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME}"    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
-    Start Process    yarn    ios    --simulator    "${DEVICE_NAME}"    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
+    Start Process    yarn    ios    --simulator    ${DEVICE_NAME}    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
     ${path_after_simulator_start}=    Run Process    pwd
     Log    ${path_after_simulator_start.stdout}
     Wait For Process    simulator_process    timeout=90
