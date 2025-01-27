@@ -96,7 +96,7 @@ jobs:
         working-directory: weather-app
 
       - name: Run React-native Doctor
-        run: react-native doctor
+        run: npx react-native doctor
         working-directory: weather-app
 
       # Step 9: Run Robot Framework tests
