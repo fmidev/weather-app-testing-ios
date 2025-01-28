@@ -1,6 +1,7 @@
 # Device config variables
 CONFIG_PLATFORM_VERSION = '18.1'
 CONFIG_DEVICE_NAME = 'iPhone 16 Pro'
+CONFIG_DEVICE_UDID = 'F80CC2E8-BF9A-40DA-A0D0-CF1135D821D1'
 
 # Appium config variables
 CONFIG_APPIUM_SERVER_URL = 'http://127.0.0.1:4723/wd/hub'
