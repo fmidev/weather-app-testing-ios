@@ -53,7 +53,7 @@ jobs:
           python-version: '3.12' # Specify Python version
 
       # Step 3: Install dependencies
-      - name: Install dependencies
+      - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install robotframework
@@ -75,6 +75,36 @@ jobs:
           git clone https://github.com/fmidev/weather-app.git
           echo "Repository cloned successfully"
 
+#      # Install Ruby
+#      - name: Install Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: '3.3.0'
+
+#      # Update bundler
+#      - name: Update bundler
+#        run: bundle update --bundler
+#        working-directory: weather-app/ios
+
+      # Step 6: Install Yarn
+      - name: Install Yarn
+        run: yarn install
+        working-directory: weather-app
+
+#      # Gem install bundler + bundle install
+#      - name: Install Ruby Dependencies
+#        run: gem install bundler && bundle install
+#        working-directory: weather-app/ios
+
+      # Install Pods
+      - name: Install Pods
+        run: pod install
+        working-directory: weather-app/ios
+
+#      - name: Run React-native Doctor
+#        run: npx react-native doctor
+#        working-directory: weather-app
+
       # Step 8: Get defaultConfig
       - name: Get defaultConfig
         env:
@@ -85,35 +115,15 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
-      # Install Ruby
-      - name: Install Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3.0'
-
-      # Update bundler
-      - name: Update bundler
-        run: bundle update --bundler
+      # Start Yarn
+      - name: Start Yarn
+        run: yarn start
         working-directory: weather-app
 
-      # Step 6: Install Yarn
-      - name: Install Yarn
-        run: yarn install
+      # Start Simulator
+      - name: Start Simulator
+        run: npx react-native run-ios --udid=F80CC2E8-BF9A-40DA-A0D0-CF1135D821D1
         working-directory: weather-app
-
-      # Gem install bundler + bundle install
-      - name: Install Ruby Dependencies
-        run: gem install bundler && bundle install
-        working-directory: weather-app
-
-      # Install Pods
-      - name: Install Pods
-        run: pod install
-        working-directory: weather-app/ios
-
-#      - name: Run React-native Doctor
-#        run: npx react-native doctor
-#        working-directory: weather-app
 
       # Step 9: Run Robot Framework tests
       - name: Run Robot Framework Tests

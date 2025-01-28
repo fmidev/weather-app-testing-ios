@@ -31,7 +31,7 @@ Stop Simulator
 
 Start Simulator And Appium With App
     Start Appium Server
-    Start Yarn
-    Start Simulator
+#    Start Yarn
+#    Start Simulator
     Set Appium Capabilities
     Switch Process    simulator_process
