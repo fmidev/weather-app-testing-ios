@@ -117,7 +117,9 @@ jobs:
 
       # Start Yarn
       - name: Start Yarn
-        run: yarn start
+        run: |
+          yarn start &
+          sleep 10
         working-directory: weather-app
 
       # Start Simulator
@@ -140,3 +142,8 @@ jobs:
             ./results
             ./stdout
           retention-days: 2
+
+      # Stop Yarn
+      - name: Stop Yarn Server
+        run: |
+          kill $(lsof -t -i:8081) || echo "Server already stopped"
