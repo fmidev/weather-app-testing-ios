@@ -1,12 +1,20 @@
 *** Keywords ***
 Set Appium Capabilities
     [Arguments]    ${pv}=${PLATFORM_VERSION}    ${dn}=${DEVICE_NAME}
+    Log    ${APPIUM_SERVER}
+    Log    ${PLATFORM_NAME}
+    Log    ${pv}
+    Log    ${dn}
+    Log    ${AUTOMATION_NAME}
+    Log    ${APP_PACKAGE}
     Open Application    ${APPIUM_SERVER}
     ...    platformName=${PLATFORM_NAME}
     ...    platformVersion=${pv}
     ...    deviceName=${dn}
     ...    automationName=${AUTOMATION_NAME}
-    ...    app=${APP_PACKAGE}
+    ...    app=com.apple.Preferences
+#    ...    app=${APP_PACKAGE}
+
 
 Start Appium Server
     Start Process    appium --base-path /wd/hub/    shell=yes    stdout=DEVNULL    stderr=DEVNULL    alias=appium_server_process

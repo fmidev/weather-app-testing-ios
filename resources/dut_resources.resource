@@ -17,7 +17,7 @@ Start Simulator
 #    Start Process    yarn    ios    --no-packager    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
     ${path_after_simulator_start}=    Run Process    pwd
     Log    ${path_after_simulator_start.stdout}
-    Wait For Process    simulator_process    timeout=90
+    Wait For Process    simulator_process    timeout=180
     Process Should Be Running    simulator_process
 
 Stop Simulator

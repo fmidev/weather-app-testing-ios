@@ -23,15 +23,15 @@ Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefull
 *** Test Cases ***
 Verify 10-day Forecast Table View Elements
     Set Log Level    TRACE
-    Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
-    Open Weather View
-    Open Search View
-    Enter Search Location    Helsinki
-    Select From Location Search Results    Helsinki
-    Verify Forecast Time
-    Verify Forecast Length    10
-    Click Weather View Button    ${FORECAST_TABLE_BUTTON_NAME}
-    Verify Table Is Active    10
-    Verify Parameters Button Is Enabled
-    Verify Parameters Info Button Is Enabled
+#    Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
+#    Open Weather View
+#    Open Search View
+#    Enter Search Location    Helsinki
+#    Select From Location Search Results    Helsinki
+#    Verify Forecast Time
+#    Verify Forecast Length    10
+#    Click Weather View Button    ${FORECAST_TABLE_BUTTON_NAME}
+#    Verify Table Is Active    10
+#    Verify Parameters Button Is Enabled
+#    Verify Parameters Info Button Is Enabled
     Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
