@@ -80,11 +80,6 @@ jobs:
         run: yarn install
         working-directory: weather-app
 
-      # Step 7: Install Pods
-      - name: Install Pods
-        run: pod install
-        working-directory: weather-app/ios
-
       # Step 8: Get defaultConfig
       - name: Get defaultConfig
         env:
@@ -94,6 +89,27 @@ jobs:
           touch defaultConfig.ts
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
+
+      # Install Ruby
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.0'
+
+      # Update bundler
+      - name: Update bundler
+        run: bundle update --bundler
+        working-directory: weather-app/ios
+
+      # Gem install bundler + bundle install
+      - name: Install Ruby Dependencies
+        run: gem install bundler && bundle install
+        working-directory: weather-app/ios
+
+      # Install Pods
+      - name: Install Pods
+        run: pod install
+        working-directory: weather-app/ios
 
 #      - name: Run React-native Doctor
 #        run: npx react-native doctor
