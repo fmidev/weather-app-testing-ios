@@ -12,8 +12,8 @@ Set Appium Capabilities
     ...    platformVersion=${pv}
     ...    deviceName=${dn}
     ...    automationName=${AUTOMATION_NAME}
-    ...    app=com.apple.Preferences
-#    ...    app=${APP_PACKAGE}
+#    ...    app=com.apple.Preferences
+    ...    app=${APP_PACKAGE}
 
 
 Start Appium Server
