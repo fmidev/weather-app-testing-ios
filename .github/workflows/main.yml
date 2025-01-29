@@ -141,6 +141,7 @@ jobs:
       # Show build settings
       - name: Show build settings
         run: xcodebuild -showBuildSettings | grep CODE_SIGN
+        working-directory: weather-app/ios
 
       # Build and Run React Native App on Simulator
       - name: Build and Run React Native App
