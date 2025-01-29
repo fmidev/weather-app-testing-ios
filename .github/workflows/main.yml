@@ -140,11 +140,13 @@ jobs:
 
       # Show build settings
       - name: Show build settings
-        run: xcodebuild -showBuildSettings
+        run: xcodebuild -showBuildSettings | grep CODE_SIGN
 
       # Build and Run React Native App on Simulator
       - name: Build and Run React Native App
-        run: npx react-native run-ios --udid="$UDID"
+        run: export CODE_SIGNING_REQUIRED=NO |
+             export CODE_SIGNING_ALLOWED=NO |
+             npx react-native run-ios --udid="$UDID"
         working-directory: weather-app
 
       # Step 9: Run Robot Framework tests
