@@ -26,7 +26,7 @@ jobs:
 
       # Select Xcode version
       - name: Select Xcode Version
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
 
       - name: Accept Xcode License
         run: sudo xcodebuild -license accept
@@ -42,9 +42,6 @@ jobs:
 
       - name: Check npm version
         run: npm -v
-
-      - name: List available Simulators
-        run: xcrun simctl list devices
 
       # Step 2: Install Python
       - name: Set up Python
@@ -67,7 +64,7 @@ jobs:
           npm install -g appium
           npm install -g appium-doctor
           appium driver install xcuitest
-          appium-doctor --ios # Check Appium setup
+#          appium-doctor --ios # Check Appium setup
 
       # Step 5: Clone repository
       - name: Clone Weather App Repository
@@ -115,6 +112,19 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
+      # List Available Simulators
+      - name: List available Simulators
+        run: xcrun simctl list devices
+
+      # Boot iPhone Simulator
+      - name: Boot iPhone Simulator
+        id: boot_simulator
+        run: |
+          UDID=$(xcrun simctl list devices available | grep 'iPhone 15 Pro' | awk -F '[()]' '{print $2}')
+          echo "Simulator UDID: $UDID"
+          xcrun simctl boot "$UDID"
+          echo "UDID=$UDID" >> $GITHUB_ENV
+
       # Start Yarn
       - name: Start Yarn
         run: |
@@ -122,9 +132,9 @@ jobs:
           sleep 10
         working-directory: weather-app
 
-      # Start Simulator
-      - name: Start Simulator
-        run: npx react-native run-ios --udid=F80CC2E8-BF9A-40DA-A0D0-CF1135D821D1
+      # Build and Run React Native App on Simulator
+      - name: Build and Run React Native App
+        run: npx react-native run-ios --udid="$UDID"
         working-directory: weather-app
 
       # Step 9: Run Robot Framework tests
