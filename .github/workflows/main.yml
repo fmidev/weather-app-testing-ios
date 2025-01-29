@@ -112,6 +112,16 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
+      # Step 9: get Widgetconfig
+      - name: Get widgetConfig
+        env:
+         widgetConfig: ${{ secrets.WIDGETCONFIG }}
+        shell: bash
+        run: |
+         touch widgetConfig.json
+         echo "$widgetConfig" >> widgetConfig.json
+        working-directory: weather-app
+
       # Check Installed iOS Runtimes
       - name: Check Installed iOS Runtimes
         run: xcrun simctl list runtimes
