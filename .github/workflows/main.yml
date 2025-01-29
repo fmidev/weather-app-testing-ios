@@ -112,6 +112,10 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
+      # Check Installed iOS Runtimes
+      - name: Check Installed iOS Runtimes
+        run: xcrun simctl list runtimes
+
       # List Available Simulators
       - name: List available Simulators
         run: xcrun simctl list devices
@@ -120,9 +124,11 @@ jobs:
       - name: Boot iPhone Simulator
         id: boot_simulator
         run: |
-          UDID=$(xcrun simctl list devices available | grep 'iPhone 15 Pro' | awk -F '[()]' '{print $2}')
+          xcrun simctl shutdown all
+          sleep 5
+          UDID=$(xcrun simctl list devices available | grep 'iPhone 15 Pro' | awk -F '[()]' '{print $2}' | head -n 1)
           echo "Simulator UDID: $UDID"
-          xcrun simctl boot "$UDID"
+          xcrun simctl boot "$UDID" || echo "Failed to boot simulator"
           echo "UDID=$UDID" >> $GITHUB_ENV
 
       # Start Yarn
