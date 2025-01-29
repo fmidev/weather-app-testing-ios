@@ -138,6 +138,10 @@ jobs:
           sleep 10
         working-directory: weather-app
 
+      # Show build settings
+      - name: Show build settings
+        run: xcodebuild -showBuildSettings
+
       # Build and Run React Native App on Simulator
       - name: Build and Run React Native App
         run: npx react-native run-ios --udid="$UDID"
