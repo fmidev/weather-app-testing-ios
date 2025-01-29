@@ -140,7 +140,7 @@ jobs:
 
       # Build and Run React Native App on Simulator
       - name: Build and Run React Native App
-        run: npx react-native run-ios --udid="$UDID" --verbose
+        run: npx react-native run-ios --udid="$UDID"
         working-directory: weather-app
 
       # Step 9: Run Robot Framework tests
