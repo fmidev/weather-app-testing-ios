@@ -167,10 +167,13 @@ jobs:
              npx react-native run-ios --udid="$UDID"
         working-directory: weather-app
 
+      - name: Check Listening Ports
+        run: netstat -an | grep LISTEN
+
       # Start Appium Server in Background
       - name: Start Appium Server
         run: |
-          appium --log-level info &
+          appium --base-path /wd/hub --log-level info &
           sleep 10
 
       # Step 9: Run Robot Framework tests
