@@ -26,7 +26,7 @@ jobs:
 
       # Select Xcode version
       - name: Select Xcode Version
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+        run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
 
       - name: Accept Xcode License
         run: sudo xcodebuild -license accept
@@ -112,6 +112,16 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
+      # Step 9: get Widgetconfig
+      - name: Get widgetConfig
+        env:
+         widgetConfig: ${{ secrets.WIDGETCONFIG }}
+        shell: bash
+        run: |
+         touch widgetConfig.json
+         echo "$widgetConfig" >> widgetConfig.json
+        working-directory: weather-app
+
       # Check Installed iOS Runtimes
       - name: Check Installed iOS Runtimes
         run: xcrun simctl list runtimes
@@ -153,7 +163,9 @@ jobs:
 
       # Build and Run React Native App on Simulator
       - name: Build and Run React Native App
-        run: npx react-native run-ios --udid="$UDID"
+        run: export CODE_SIGNING_REQUIRED=NO |
+             export CODE_SIGNING_ALLOWED=NO |
+             npx react-native run-ios --udid="$UDID"
         working-directory: weather-app
 
       # Start Appium Server in Background
