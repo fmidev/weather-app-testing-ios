@@ -1,15 +1,15 @@
 *** Keywords ***
 Set Appium Capabilities
-    [Arguments]    ${pv}=${PLATFORM_VERSION}    ${dn}=${DEVICE_NAME}
+    [Arguments]    ${iv}=%{IOS_VERSION}    ${dn}=%{DEVICE_NAME}
     Log    ${APPIUM_SERVER}
     Log    ${PLATFORM_NAME}
-    Log    ${pv}
+    Log    ${iv}
     Log    ${dn}
     Log    ${AUTOMATION_NAME}
     Log    ${APP_PACKAGE}
     Open Application    ${APPIUM_SERVER}
     ...    platformName=${PLATFORM_NAME}
-    ...    platformVersion=${pv}
+    ...    platformVersion=${iv}
     ...    deviceName=${dn}
     ...    automationName=${AUTOMATION_NAME}
 #    ...    app=com.apple.Preferences
@@ -17,7 +17,8 @@ Set Appium Capabilities
 
 
 Start Appium Server
-    Start Process    appium --base-path /wd/hub/    shell=yes    stdout=DEVNULL    stderr=DEVNULL    alias=appium_server_process
+#    Start Process    appium --base-path /wd/hub/    shell=yes    stdout=DEVNULL    stderr=DEVNULL    alias=appium_server_process
+    Start Process    appium --base-path /wd/hub/    shell=yes    stdout=${CURDIR}/../stdout/appium_stdout.txt    stderr=${CURDIR}/../stdout/appium_stderr.txt    alias=appium_server_process
     Wait For Process    appium_server_process    timeout=30 seconds
     Process Should Be Running    appium_server_process
 

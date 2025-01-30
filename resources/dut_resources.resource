@@ -30,7 +30,7 @@ Stop Simulator
     Process Should Be Stopped    simulator_process
 
 Start Simulator And Appium With App
-    Start Appium Server
+#    Start Appium Server
 #    Start Yarn
 #    Start Simulator
     Set Appium Capabilities
