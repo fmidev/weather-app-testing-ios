@@ -148,6 +148,8 @@ jobs:
           DEVICE_INFO=$(xcrun simctl list devices | grep "$UDID")
           DEVICE_NAME=$(echo "$DEVICE_INFO" | awk -F ' \\(' '{print $1}' | xargs)
           IOS_VERSION=$(xcrun simctl list devices | grep -B1 "$UDID" | head -n 1 | awk '{print $2}')
+          echo "Simulator DEVICE_NAME: $DEVICE_NAME"
+          echo "Simulator IOS_VERSION: $IOS_VERSION"
           echo "DEVICE_NAME=$DEVICE_NAME" >> $GITHUB_ENV
           echo "IOS_VERSION=$IOS_VERSION" >> $GITHUB_ENV
 

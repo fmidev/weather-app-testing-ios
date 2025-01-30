@@ -1,6 +1,7 @@
 *** Keywords ***
 Set Appium Capabilities
-    [Arguments]    ${iv}=%{IOS_VERSION}    ${dn}=%{DEVICE_NAME}
+#    [Arguments]    ${iv}=%{IOS_VERSION}    ${dn}=%{DEVICE_NAME}
+    [Arguments]    ${iv}=17.0    ${dn}=%{DEVICE_NAME}
     Log    ${APPIUM_SERVER}
     Log    ${PLATFORM_NAME}
     Log    ${iv}
