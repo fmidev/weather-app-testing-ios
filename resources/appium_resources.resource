@@ -1,21 +1,11 @@
 *** Keywords ***
 Set Appium Capabilities
-#    [Arguments]    ${iv}=%{IOS_VERSION}    ${dn}=%{DEVICE_NAME}
-#    [Arguments]    ${iv}=17.0    ${dn}=%{DEVICE_NAME}
-#    [Arguments]    ${dn}=%{DEVICE_NAME}
-#    Log    ${APPIUM_SERVER}
-    Log    ${PLATFORM_NAME}
-#    Log    ${iv}
-#    Log    ${dn}
-    Log    ${AUTOMATION_NAME}
-    Log    ${APP_PACKAGE}
     Open Application    http://127.0.0.1:4723/wd/hub
     ...    platformName=${PLATFORM_NAME}
-#    ...    platformVersion=${iv}
+#    ...    platformVersion=%{IOS_VERSION}
     ...    deviceName=%{DEVICE_NAME}
     ...    udid=%{UDID}
     ...    automationName=${AUTOMATION_NAME}
-#    ...    app=com.apple.Preferences
     ...    app=${APP_PACKAGE}
     ...    appium:wdaLaunchTimeout=120000
 

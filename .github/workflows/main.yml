@@ -17,43 +17,47 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Setup node
+      # Step 2: Setup node
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           # cache: 'yarn'
 
-      # Select Xcode version
+      # Step 3: Check Node version
+      - name: Verify Node Version
+        run: node -v
+
+      # Step 4: Check Npm version
+      - name: Verify npm version
+        run: npm -v
+
+      # Step 5: Select Xcode version
       - name: Select Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
 
-      - name: Accept Xcode License
+      # Step 6: Authorize Xcode WebDriverAgent Permissions
+      - name: Authorize Xcode WebDriverAgent Permissions
         run: | 
           sudo xcodebuild -license accept
           sudo chmod -R 777 /Applications/Xcode.app/Contents/Developer
-        
 
-      - name: Check XCode Version
-        run: /usr/bin/xcodebuild -version
-
+      # Step 7: Ensure Xcode Command Line Tools are installed
       - name: Install Xcode Command Line Tools
         run: sudo xcode-select --install || echo "Command line tools already installed"
+        
+      # Step 8: Check Xcode version
+      - name: Verify XCode Version
+        run: /usr/bin/xcodebuild -version
 
-      - name: Check Node Version
-        run: node -v
-
-      - name: Check npm version
-        run: npm -v
-
-      # Step 2: Install Python
+      # Step 9: Install Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.12' # Specify Python version
 
-      # Step 3: Install dependencies
-      - name: Install Python Dependencies
+      # Step 10: Install Robot Framework, libraries and other dependencies
+      - name: Install Python Dependencies For Robot Framework
         run: |
           python -m pip install --upgrade pip
           pip install robotframework
@@ -61,51 +65,30 @@ jobs:
           pip install robotframework-seleniumlibrary
           pip install Appium-Python-Client
           
-      # Step 4: Install Appium
+      # Step 11: Install Appium
       - name: Install Appium
         run: |
           npm install -g appium
           npm install -g appium-doctor
           appium driver install xcuitest
-#          appium-doctor --ios # Check Appium setup
 
-      # Step 5: Clone repository
+      # Step 12: Clone repository
       - name: Clone Weather App Repository
         run: |
           git clone https://github.com/fmidev/weather-app.git
           echo "Repository cloned successfully"
 
-#      # Install Ruby
-#      - name: Install Ruby
-#        uses: ruby/setup-ruby@v1
-#        with:
-#          ruby-version: '3.3.0'
-
-#      # Update bundler
-#      - name: Update bundler
-#        run: bundle update --bundler
-#        working-directory: weather-app/ios
-
-      # Step 6: Install Yarn
+      # Step 13: Install Yarn
       - name: Install Yarn
         run: yarn install
         working-directory: weather-app
 
-#      # Gem install bundler + bundle install
-#      - name: Install Ruby Dependencies
-#        run: gem install bundler && bundle install
-#        working-directory: weather-app/ios
-
-      # Install Pods
+      # Step 14: Install Pods
       - name: Install Pods
         run: pod install
         working-directory: weather-app/ios
 
-#      - name: Run React-native Doctor
-#        run: npx react-native doctor
-#        working-directory: weather-app
-
-      # Step 8: Get defaultConfig
+      # Step 15: Get defaultConfig
       - name: Get defaultConfig
         env:
           defaultConfig: ${{ secrets.DEFAULTCONFIG }}
@@ -115,7 +98,7 @@ jobs:
           echo "$defaultConfig" >> defaultConfig.ts
         working-directory: weather-app
 
-      # Step 9: get Widgetconfig
+      # Step 16: get Widgetconfig
       - name: Get widgetConfig
         env:
          widgetConfig: ${{ secrets.WIDGETCONFIG }}
@@ -125,15 +108,15 @@ jobs:
          echo "$widgetConfig" >> widgetConfig.json
         working-directory: weather-app
 
-      # Check Installed iOS Runtimes
+      # Step 17: Check Installed iOS Runtimes
       - name: Check Installed iOS Runtimes
         run: xcrun simctl list runtimes
 
-      # List Available Simulators
+      # Step 18: List Available Simulators
       - name: List available Simulators
         run: xcrun simctl list devices
 
-      # Boot iPhone Simulator
+      # Step 19: Boot iPhone Simulator and get UDID
       - name: Boot iPhone Simulator
         id: boot_simulator
         run: |
@@ -144,56 +127,50 @@ jobs:
           xcrun simctl boot "$UDID" || echo "Failed to boot simulator"
           echo "UDID=$UDID" >> $GITHUB_ENV
 
-      # Extract Phone Name and iOS Version from UDID
-      - name: Extract Phone Name and iOS Version from UDID
+      # Step 20: Extract Phone Name and iOS Version for UDID
+      - name: Extract Phone Name and iOS Version for UDID
         id: extract_device_info
         run: |
           DEVICE_INFO=$(xcrun simctl list devices | grep "$UDID")
           DEVICE_NAME=$(echo "$DEVICE_INFO" | awk -F ' \\(' '{print $1}' | xargs)
-          IOS_VERSION=$(xcrun simctl list devices | grep -B1 "$UDID" | head -n 1 | awk '{print $2}')
+          IOS_VERSION=$(xcrun simctl list devices | awk -v udid="$UDID" ' $0 ~ /^-- iOS/ { ios_version=$2 } $0 ~ udid { print ios_version }' | head -n 1)
           echo "Simulator DEVICE_NAME: $DEVICE_NAME"
           echo "Simulator IOS_VERSION: $IOS_VERSION"
           echo "DEVICE_NAME=$DEVICE_NAME" >> $GITHUB_ENV
           echo "IOS_VERSION=$IOS_VERSION" >> $GITHUB_ENV
 
-      # Start Yarn
+      # Step 21: Start Yarn
       - name: Start Yarn
         run: |
           yarn start &
           sleep 10
         working-directory: weather-app
 
-      # Build and Run React Native App on Simulator
-      - name: Build and Run React Native App
+      # Step 22: Build and Run React Native App on Simulator
+      - name: Build and Run React Native App on Simulator
         run: export CODE_SIGNING_REQUIRED=NO |
              export CODE_SIGNING_ALLOWED=NO |
              npx react-native run-ios --udid="$UDID"
         working-directory: weather-app
 
-      - name: Check Listening Ports
-        run: netstat -an | grep LISTEN
-
+      # Step 23: Verify Running Simulator Status
       - name: Verify Simulator Status
         run: xcrun simctl list devices
 
-      # Start Appium Server in Background
+      # Step 24: Start Appium Server in the Background
       - name: Start Appium Server
         run: |
           appium --base-path /wd/hub --log-level info &
           sleep 10
 
-      # Step 9: Run Robot Framework tests
+      # Step 25: Run Robot Framework tests
       - name: Run Robot Framework Tests
         run: |
           robot -d results tests/onboarding_tests.robot
         continue-on-error: true
 
-      # WebDriverAgent Logs
-      - name: Debug WebDriverAgent Logs
-        run: cat $HOME/Library/Developer/Xcode/DerivedData/WebDriverAgent-*/Logs/Test/*.log || true
-
-      # Step 10: Upload artifact
-      - name: Upload artifact
+      # Step 26: Upload Robot Framework test results as artifacts
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: robot-test-results
@@ -202,7 +179,7 @@ jobs:
             ./stdout
           retention-days: 2
 
-      # Stop Yarn
+      # Step 27: Stop Yarn
       - name: Stop Yarn Server
         run: |
           kill $(lsof -t -i:8081) || echo "Server already stopped"
