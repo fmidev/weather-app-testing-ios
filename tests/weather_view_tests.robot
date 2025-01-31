@@ -17,8 +17,9 @@ Variables        ../variables/appium_setup_variables.py
 Variables        ../variables/onboarding_variables.py
 Variables        ../variables/dut_variables.py
 Variables        ../variables/config_variables.py
-Test Setup       Start Simulator And Appium With App
-Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
+#Test Setup       Start Simulator And Appium With App
+Test Setup       Set Appium Capabilities
+#Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
 
 *** Test Cases ***
 Verify 10-day Forecast Table View Elements
@@ -34,4 +35,4 @@ Verify 10-day Forecast Table View Elements
     Verify Table Is Active    10
     Verify Parameters Button Is Enabled
     Verify Parameters Info Button Is Enabled
-    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
+#    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process

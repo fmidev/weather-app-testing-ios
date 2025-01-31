@@ -185,7 +185,7 @@ jobs:
       # Step 9: Run Robot Framework tests
       - name: Run Robot Framework Tests
         run: |
-          robot -d results tests/weather_view_tests.robot
+          robot -d results tests/onboarding_tests.robot
         continue-on-error: true
 
       # WebDriverAgent Logs

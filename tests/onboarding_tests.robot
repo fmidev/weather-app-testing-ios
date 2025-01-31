@@ -13,8 +13,9 @@ Variables        ../variables/appium_setup_variables.py
 Variables        ../variables/onboarding_variables.py
 Variables        ../variables/dut_variables.py
 Variables        ../variables/config_variables.py
-Test Setup       Start Simulator And Appium With App
-Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
+#Test Setup       Start Simulator And Appium With App
+Test Setup       Set Appium Capabilities
+#Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
 
 *** Test Cases ***
 Open Mobile Weather App With Full Onboarding Successfully
@@ -46,4 +47,4 @@ Open Mobile Weather App With Full Onboarding Successfully
     Grant Locating Alert Is Visible
     Select Allow While Using App From Grant Locating Alert
     Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
-    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
+#    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
