@@ -6,7 +6,7 @@ Set Appium Capabilities
 #    Log    ${APPIUM_SERVER}
     Log    ${PLATFORM_NAME}
 #    Log    ${iv}
-    Log    ${dn}
+#    Log    ${dn}
     Log    ${AUTOMATION_NAME}
     Log    ${APP_PACKAGE}
     Open Application    http://127.0.0.1:4723/wd/hub
