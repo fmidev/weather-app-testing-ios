@@ -17,6 +17,7 @@ Set Appium Capabilities
     ...    automationName=${AUTOMATION_NAME}
 #    ...    app=com.apple.Preferences
     ...    app=${APP_PACKAGE}
+    ...    appium:wdaLaunchTimeout=120000
 
 
 Start Appium Server

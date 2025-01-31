@@ -29,7 +29,10 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
 
       - name: Accept Xcode License
-        run: sudo xcodebuild -license accept
+        run: | 
+          sudo xcodebuild -license accept
+          sudo chmod -R 777 /Applications/Xcode.app/Contents/Developer
+        
 
       - name: Check XCode Version
         run: /usr/bin/xcodebuild -version
@@ -170,6 +173,9 @@ jobs:
       - name: Check Listening Ports
         run: netstat -an | grep LISTEN
 
+      - name: Verify Simulator Status
+        run: xcrun simctl list devices
+
       # Start Appium Server in Background
       - name: Start Appium Server
         run: |
@@ -181,6 +187,10 @@ jobs:
         run: |
           robot -d results tests/weather_view_tests.robot
         continue-on-error: true
+
+      # WebDriverAgent Logs
+      - name: Debug WebDriverAgent Logs
+        run: cat $HOME/Library/Developer/Xcode/DerivedData/WebDriverAgent-*/Logs/Test/*.log || true
 
       # Step 10: Upload artifact
       - name: Upload artifact
