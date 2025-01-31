@@ -9,18 +9,9 @@ Stop Yarn
     Process Should Be Stopped    yarn_process
 
 Start Simulator
-    ${path_before_simulator_start}=    Run Process    pwd
-    Log    ${path_before_simulator_start.stdout}
 #    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME}"    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
     Start Process    npx    react-native    run-ios    --udid\=${CONFIG_DEVICE_UDID}    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
-#    Start Process    yarn    ios    --simulator    ${DEVICE_NAME}    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
-#    Start Process    yarn    ios    --no-packager    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
-    ${path_after_simulator_start}=    Run Process    pwd
-    Log    ${path_after_simulator_start.stdout}
-    Sleep    10
-    Run Process    npx    react-native    doctor    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/doctor_stdout.txt    stderr=${CURDIR}/../stdout/doctor_stderr.txt    alias=doctor_process
     Wait For Process    simulator_process    timeout=180
-    Terminate Process    doctor_process
     Process Should Be Running    simulator_process
 
 Stop Simulator
@@ -28,13 +19,6 @@ Stop Simulator
     Terminate Process    simulator_process
     Process Should Be Stopped    kill_simulator
     Process Should Be Stopped    simulator_process
-
-Start Simulator And Appium With App
-#    Start Appium Server
-#    Start Yarn
-#    Start Simulator
-    Set Appium Capabilities
-    Switch Process    simulator_process
 
 Start Simulator And Appium With App
     Start Appium Server
