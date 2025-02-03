@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-          cache-dependency-path: weather-app-testing-ios/yarn.lock
+          cache-dependency-path: weather-app-testing-ios/weather-app-testing-ios/yarn.lock
 
       # Step 3: Check Node version
       - name: Verify Node Version
