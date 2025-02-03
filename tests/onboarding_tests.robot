@@ -19,6 +19,7 @@ Test Setup       Set Appium Capabilities
 
 *** Test Cases ***
 Open Mobile Weather App With Full Onboarding Successfully
+    Verify Environment
     Weather Forecast And Observations Onboarding Icon Is Visible    ${OB_ICON_NAME_1}
     Weather Forecast And Observations Onboarding Title Is Visible    ${OB_WFO_TITLE_EN}
     Weather Forecast And Observations Onboarding Text Is Visible    ${OB_WFO_TEXT_EN}

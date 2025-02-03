@@ -28,6 +28,8 @@ Start Simulator And Appium With App
     Switch Process    simulator_process
     
 Verify Environment
-    ${env_variables_list}=    Get Environmental Variables
-    ${status}=    Get Status Is Key Found In Dictionary    CI_ENV
+    ${env_variables_dict}=    Get Environment Variables
+    ${status}=    Get Status Is Key Found In Dictionary    ${env_variables_dict}    CI_ENV
+    Log    ${env_variables_dict}
+    Log    ${status}
     RETURN    ${status}
