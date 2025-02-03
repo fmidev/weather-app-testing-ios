@@ -26,3 +26,8 @@ Start Simulator And Appium With App
     Start Simulator
     Set Appium Capabilities
     Switch Process    simulator_process
+    
+Verify Environment
+    ${env_variables_list}=    Get Environmental Variables
+    ${status}=    Get Status Is Key Found In Dictionary    CI_ENV
+    RETURN    ${status}

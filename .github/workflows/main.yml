@@ -3,6 +3,9 @@ name: iOS Robot Framework CI / CD Tests
 on:
   workflow_dispatch:
 
+env:
+  CI_ENV: "ci"
+
 jobs:
   run-robot-framework-appium-ios-tests:
     runs-on: macos-latest
@@ -160,8 +163,8 @@ jobs:
       # Step 24: Start Appium Server in the Background
       - name: Start Appium Server
         run: |
-          appium --base-path /wd/hub --log-level info &
-          sleep 10
+          appium --base-path /wd/hub --address 127.0.0.1 --port 4723 --log-level info &
+          sleep 20
 
       # Step 25: Run Robot Framework tests
       - name: Run Robot Framework Tests
