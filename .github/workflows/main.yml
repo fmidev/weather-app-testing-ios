@@ -25,7 +25,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          # cache: 'yarn'
+          cache: 'yarn'
+          cache-dependency-path: weather-app-testing-ios/yarn.lock
 
       # Step 3: Check Node version
       - name: Verify Node Version
@@ -136,7 +137,7 @@ jobs:
         run: |
           DEVICE_INFO=$(xcrun simctl list devices | grep "$UDID")
           DEVICE_NAME=$(echo "$DEVICE_INFO" | awk -F ' \\(' '{print $1}' | xargs)
-          IOS_VERSION=$(xcrun simctl list devices | awk -v udid="$UDID" ' /^-- iOS/ { ios_version=$2 } $0 ~ udid { print ios_version }')
+          IOS_VERSION=$(xcrun simctl list devices | awk -v udid="$UDID" ' /^-- iOS/ { ios_version=$3 } $0 ~ udid { print ios_version }')
           echo "Simulator DEVICE_NAME: $DEVICE_NAME"
           echo "Simulator IOS_VERSION: $IOS_VERSION"
           echo "DEVICE_NAME=$DEVICE_NAME" >> $GITHUB_ENV
