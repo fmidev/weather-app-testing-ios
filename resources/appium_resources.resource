@@ -7,7 +7,7 @@ Set Appium Capabilities
     ...    udid=%{UDID}
     ...    automationName=${AUTOMATION_NAME}
     ...    app=${APP_PACKAGE}
-    ...    appium:wdaLaunchTimeout=120000
+    ...    appium:wdaLaunchTimeout=150000
 
 
 Start Appium Server
