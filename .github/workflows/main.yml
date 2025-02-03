@@ -20,13 +20,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Debug Verify yarn.lock existence
+        run: ls -la
+
       # Step 2: Setup node
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-          cache-dependency-path: weather-app-testing-ios/weather-app-testing-ios/yarn.lock
 
       # Step 3: Check Node version
       - name: Verify Node Version
