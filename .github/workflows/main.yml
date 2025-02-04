@@ -162,7 +162,7 @@ jobs:
       # Step 24: Start Appium Server in the Background
       - name: Start Appium Server
         run: |
-          appium --base-path /wd/hub --address 127.0.0.1 --port 4723 --log-level info &
+          appium --base-path /wd/hub --address 127.0.0.1 --port 4723 --log-level info > appium.log 2>&1 &
           sleep 20
 
       # Step 25: Run Robot Framework tests
@@ -181,7 +181,15 @@ jobs:
             ./stdout
           retention-days: 2
 
-      # Step 27: Stop Yarn
+      # Step 27: Upload Appium Logs
+      - name: Upload Appium Logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: appium-logs
+          path: appium.log
+          retention-days: 2
+
+      # Step 28: Stop Yarn
       - name: Stop Yarn Server
         run: |
           kill $(lsof -t -i:8081) || echo "Server already stopped"
