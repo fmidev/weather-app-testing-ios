@@ -17,7 +17,7 @@ Variables        ../variables/config_variables.py
 #Test Setup       Start Simulator And Appium With App
 #Test Setup       Set Appium Capabilities
 Test Setup        Test Setup Actions
-#Test Teardown    Run Keyword If Test Failed    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
+Test Teardown     Run Keyword If Test Failed    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
 
 *** Test Cases ***
 Open Mobile Weather App With Full Onboarding Successfully

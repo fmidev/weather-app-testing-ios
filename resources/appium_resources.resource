@@ -1,14 +1,31 @@
 *** Keywords ***
 Set Appium Capabilities
-    [Arguments]    ${device_name}=%{DEVICE_NAME}    ${device_id}=%{UDID}    ${app}=${APP_PACKAGE}
-    Open Application    http://127.0.0.1:4723/wd/hub
-    ...    platformName=iOS
-#    ...    platformVersion=%{IOS_VERSION}
-    ...    deviceName=${device_name}
-    ...    udid=${device_id}
-    ...    automationName=XCUITest
-    ...    app=${app}
-    ...    appium:wdaLaunchTimeout=150000
+    [Arguments]    ${platform_version}=%{IOS_VERSION}    ${device_name}=%{DEVICE_NAME}    ${device_id}=%{UDID}    ${app}=${APP_PACKAGE}
+    Log    ${platform_version}
+    Log    ${device_name}
+    Log    ${device_id}
+    Log    ${app}
+    TRY
+        Open Application    http://127.0.0.1:4723/wd/hub
+        ...    platformName=iOS
+        ...    platformVersion=${platform_version}
+        ...    deviceName=${device_name}
+        ...    udid=${device_id}
+        ...    automationName=XCUITest
+        ...    app=${app}
+        ...    appium:wdaLaunchTimeout=170000
+    EXCEPT    ProtocolError: *    type=GLOB
+        Start Appium Server
+        Open Application    http://127.0.0.1:4723/wd/hub
+        ...    platformName=iOS
+        ...    platformVersion=${platform_version}
+        ...    deviceName=${device_name}
+        ...    udid=${device_id}
+        ...    automationName=XCUITest
+        ...    app=${app}
+        ...    appium:wdaLaunchTimeout=120000
+    END
+
 
 
 Start Appium Server
