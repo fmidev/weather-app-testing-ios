@@ -183,7 +183,7 @@ jobs:
 
       # Step 27: Upload Appium Logs
       - name: Upload Appium Logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: appium-logs
           path: appium.log
