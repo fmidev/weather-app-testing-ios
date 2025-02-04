@@ -27,6 +27,14 @@ Start Simulator And Appium With App
     Set Appium Capabilities
     Switch Process    simulator_process
     
+Test Setup Actions
+    ${is_local_env}=    Verify Environment
+    IF    ${is_local_env}==${FALSE}
+        Set Appium Capabilities
+    ELSE IF    ${is_local_env}==${TRUE}
+        Start Simulator And Appium With App
+    ELSE
+    
 Verify Environment
     ${env_variables_dict}=    Get Environment Variables
     ${status}=    Get Status Is Key Found In Dictionary    ${env_variables_dict}    CI_ENV

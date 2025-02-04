@@ -1,12 +1,13 @@
 *** Keywords ***
 Set Appium Capabilities
+    [Arguments]    ${device_name}=%{DEVICE_NAME}    ${device_id}=%{UDID}    ${app}=${APP_PACKAGE}
     Open Application    http://127.0.0.1:4723/wd/hub
-    ...    platformName=${PLATFORM_NAME}
+    ...    platformName=iOS
 #    ...    platformVersion=%{IOS_VERSION}
-    ...    deviceName=%{DEVICE_NAME}
-    ...    udid=%{UDID}
-    ...    automationName=${AUTOMATION_NAME}
-    ...    app=${APP_PACKAGE}
+    ...    deviceName=${device_name}
+    ...    udid=${device_id}
+    ...    automationName=XCUITest
+    ...    app=${app}
     ...    appium:wdaLaunchTimeout=150000
 
 
