@@ -145,7 +145,7 @@ jobs:
       - name: Start Yarn
         run: |
           yarn start &
-          sleep 10
+          sleep 15
         working-directory: weather-app
 
       # Step 22: Build and Run React Native App on Simulator

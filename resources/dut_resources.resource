@@ -28,12 +28,12 @@ Start Simulator And Appium With App
     Switch Process    simulator_process
     
 Test Setup Actions
-    ${is_local_env}=    Verify Environment
-    IF    ${is_local_env}==${FALSE}
+    ${is_ci_env}=    Verify Environment
+    IF    ${is_ci_env}==${TRUE}
         Set Appium Capabilities
-    ELSE IF    ${is_local_env}==${TRUE}
+    ELSE IF    ${is_ci_env}==${FALSE}
         Start Simulator And Appium With App
-    ELSE
+    END
     
 Verify Environment
     ${env_variables_dict}=    Get Environment Variables
