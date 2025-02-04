@@ -6,24 +6,24 @@ Set Appium Capabilities
     Log    ${device_id}
     Log    ${app}
     TRY
-        Open Application    http://127.0.0.1:4723/wd/hub
+        Open Application    ${APPIUM_SERVER}
         ...    platformName=iOS
         ...    platformVersion=${platform_version}
         ...    deviceName=${device_name}
         ...    udid=${device_id}
         ...    automationName=XCUITest
         ...    app=${app}
-        ...    appium:wdaLaunchTimeout=170000
+        ...    appium:wdaLaunchTimeout=${170000}
     EXCEPT    ProtocolError: *    type=GLOB
         Start Appium Server
-        Open Application    http://127.0.0.1:4723/wd/hub
+        Open Application    ${APPIUM_SERVER}
         ...    platformName=iOS
         ...    platformVersion=${platform_version}
         ...    deviceName=${device_name}
         ...    udid=${device_id}
         ...    automationName=XCUITest
         ...    app=${app}
-        ...    appium:wdaLaunchTimeout=120000
+        ...    appium:wdaLaunchTimeout=${120000}
     END
 
 

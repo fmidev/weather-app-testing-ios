@@ -14,8 +14,6 @@ Variables        ../variables/appium_setup_variables.py
 Variables        ../variables/onboarding_variables.py
 Variables        ../variables/dut_variables.py
 Variables        ../variables/config_variables.py
-#Test Setup       Start Simulator And Appium With App
-#Test Setup       Set Appium Capabilities
 Test Setup        Test Setup Actions
 Test Teardown     Run Keyword If Test Failed    Test Teardown Actions
 
