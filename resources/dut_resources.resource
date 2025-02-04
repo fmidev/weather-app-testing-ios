@@ -34,10 +34,16 @@ Test Setup Actions
     ELSE IF    ${is_ci_env}==${FALSE}
         Start Simulator And Appium With App
     END
+
+Test Teardown Actions
+    ${is_ci_env}=    Verify Environment
+    IF    ${is_ci_env}==${TRUE}
+        No Operation
+    ELSE IF    ${is_ci_env}==${FALSE}
+        Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process
+    END
     
 Verify Environment
     ${env_variables_dict}=    Get Environment Variables
     ${status}=    Get Status Is Key Found In Dictionary    ${env_variables_dict}    CI_ENV
-    Log    ${env_variables_dict}
-    Log    ${status}
     RETURN    ${status}
