@@ -9,8 +9,7 @@ Stop Yarn
     Process Should Be Stopped    yarn_process
 
 Start Simulator
-    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME_LOCAL_1}"    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
-#    Start Process    npx    react-native    run-ios    --udid\=${CONFIG_DEVICE_UDID}    cwd=${CONFIG_SIMULATOR_PATH}    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
+    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME_LOCAL_2}"    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
     Wait For Process    simulator_process    timeout=180
     Process Should Be Running    simulator_process
 
@@ -21,7 +20,7 @@ Stop Simulator
     Process Should Be Stopped    simulator_process
 
 Start Simulator And Appium With App
-    [Arguments]    ${platform_version}=${IOS_VERSION_LOCAL_1}    ${device_name}=${DEVICE_NAME_LOCAL_1}    ${device_id}=${DEVICE_ID_LOCAL_1}
+    [Arguments]    ${platform_version}=${IOS_VERSION_LOCAL_2}    ${device_name}=${DEVICE_NAME_LOCAL_2}    ${device_id}=${DEVICE_ID_LOCAL_2}
     Start Appium Server
     Start Yarn
     Start Simulator

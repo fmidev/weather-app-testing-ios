@@ -23,7 +23,7 @@ ${title_text} Setup Text Is Visible
     Element Value Should Be    xpath=//XCUIElementTypeStaticText[@name="setup_description_text"]    ${text}
 
 Grant Locating Alert Is Visible
-    Wait Until Element Is Visible    xpath=//XCUIElementTypeAlert[@name="Allow “FMI Weather” to use your location?"]
+    Wait Until Element Is Visible    xpath=//XCUIElementTypeAlert[@name='Allow “FMI Weather” to use your location?']    timeout=10
 
 Select ${selection} From Grant Locating Alert
     IF    '${selection}'=='Allow Once'
