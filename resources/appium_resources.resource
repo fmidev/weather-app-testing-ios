@@ -13,6 +13,7 @@ Set Appium Capabilities
         ...    udid=${device_id}
         ...    automationName=XCUITest
         ...    app=${app}
+        ...    appium:processArguments={"args": ["e2e=true"]}
         ...    appium:wdaLaunchTimeout=${170000}
     EXCEPT    ProtocolError: *    type=GLOB
         Start Appium Server
@@ -26,10 +27,7 @@ Set Appium Capabilities
         ...    appium:wdaLaunchTimeout=${120000}
     END
 
-
-
 Start Appium Server
-#    Start Process    appium --base-path /wd/hub/    shell=yes    stdout=DEVNULL    stderr=DEVNULL    alias=appium_server_process
     Start Process    appium --base-path /wd/hub    shell=yes    stdout=${CURDIR}/../stdout/appium_stdout.txt    stderr=${CURDIR}/../stdout/appium_stderr.txt    alias=appium_server_process
     Wait For Process    appium_server_process    timeout=30 seconds
     Process Should Be Running    appium_server_process

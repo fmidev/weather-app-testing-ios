@@ -56,3 +56,6 @@ Click Close Button From Terms Of Use View
 Click Accept Button
     Accept Button Should Be Enabled
     Click Element    accessibility_id=setup_primary_button
+
+Click Location Setup Next Button
+    Click Element    accessibility_id=setup_primary_button
