@@ -26,6 +26,7 @@ Grant Locating Alert Is Visible
     Wait Until Page Contains Element    xpath=//XCUIElementTypeAlert[@name="Allow “FMI Weather” to use your location?"]    timeout=10
 
 Select ${selection} From Grant Locating Alert
+    Sleep    5
     IF    '${selection}'=='Allow Once'
         Click Alert Button    Allow Once
     ELSE IF    '${selection}'=='Allow While Using App'

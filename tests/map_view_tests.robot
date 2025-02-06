@@ -14,7 +14,6 @@ Resource         ../resources/map_view_resources.resource
 Variables        ../variables/appium_setup_variables.py
 Variables        ../variables/onboarding_variables.py
 Variables        ../variables/dut_variables.py
-Variables        ../variables/config_variables.py
 Test Setup        Test Setup Actions
 Test Teardown     Run Keyword If Test Failed    Test Teardown Actions
 
