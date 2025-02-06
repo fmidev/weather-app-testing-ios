@@ -44,7 +44,6 @@ Open Mobile Weather App With Full Onboarding Successfully
     Location Setup Title Is Visible    ${OB_LOC_TITLE_EN}
     Location Setup Text Is Visible    ${OB_LOC_TEXT_EN}
     Click Location Setup Next Button
-    Grant Locating Alert Is Visible
     Select Allow While Using App From Grant Locating Alert
     Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
     Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process

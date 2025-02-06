@@ -16,13 +16,11 @@ Variables        ../variables/weather_view_variables.py
 Variables        ../variables/appium_setup_variables.py
 Variables        ../variables/onboarding_variables.py
 Variables        ../variables/dut_variables.py
-Variables        ../variables/config_variables.py
 Test Setup        Test Setup Actions
 Test Teardown     Run Keyword If Test Failed    Test Teardown Actions
 
 *** Test Cases ***
 Verify 10-day Forecast Table View Elements
-    Set Log Level    TRACE
     Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
     Open Weather View
     Open Search View

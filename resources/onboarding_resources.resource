@@ -23,15 +23,15 @@ ${title_text} Setup Text Is Visible
     Element Value Should Be    xpath=//XCUIElementTypeStaticText[@name="setup_description_text"]    ${text}
 
 Grant Locating Alert Is Visible
-    Wait Until Element Is Visible    xpath=//XCUIElementTypeAlert[@name='Allow “FMI Weather” to use your location?']    timeout=10
+    Wait Until Page Contains Element    xpath=//XCUIElementTypeAlert[@name="Allow “FMI Weather” to use your location?"]    timeout=10
 
 Select ${selection} From Grant Locating Alert
     IF    '${selection}'=='Allow Once'
-        Click Element    accessibility_id=Allow Once
+        Click Alert Button    Allow Once
     ELSE IF    '${selection}'=='Allow While Using App'
-        Click Element    accessibility_id=Allow While Using App
+        Click Alert Button    Allow While Using App
     ELSE IF    '${selection}'=='Dont Allow'
-        Click Element    accessibility_id=Don’t Allow
+        Click Alert Button    Don’t Allow
     END
 
 Verify Location Text From Upper Bar

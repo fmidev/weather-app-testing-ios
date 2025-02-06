@@ -10,7 +10,8 @@ Enter Search Location
 
 Select From Location Search Results
     [Arguments]    ${location}
-    Click Element    accessibility_id=${location}
+    Wait Until Element Is Visible    xpath=//XCUIElementTypeButton[@name="${location}"]
+    Click Element    xpath=//XCUIElementTypeButton[@name="${location}"]
     Verify Location Text From Upper Bar    ${location}
 
 
