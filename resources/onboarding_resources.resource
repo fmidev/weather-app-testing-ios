@@ -27,12 +27,23 @@ Grant Locating Alert Is Visible
 
 Select ${selection} From Grant Locating Alert
     Sleep    5
-    IF    '${selection}'=='Allow Once'
-        Click Alert Button    Allow Once
-    ELSE IF    '${selection}'=='Allow While Using App'
-        Click Alert Button    Allow While Using App
-    ELSE IF    '${selection}'=='Dont Allow'
-        Click Alert Button    Don’t Allow
+    TRY
+        IF    '${selection}'=='Allow Once'
+            Click Alert Button    Allow Once
+        ELSE IF    '${selection}'=='Allow While Using App'
+            Click Alert Button    Allow While Using App
+        ELSE IF    '${selection}'=='Dont Allow'
+            Click Alert Button    Don’t Allow
+        END
+    EXCEPT    NoAlertPresentException: *    type=GLOB
+        Click Location Setup Next Button
+        IF    '${selection}'=='Allow Once'
+            Click Alert Button    Allow Once
+        ELSE IF    '${selection}'=='Allow While Using App'
+            Click Alert Button    Allow While Using App
+        ELSE IF    '${selection}'=='Dont Allow'
+            Click Alert Button    Don’t Allow
+        END
     END
 
 Verify Location Text From Upper Bar
@@ -59,4 +70,4 @@ Click Accept Button
     Click Element    accessibility_id=setup_primary_button
 
 Click Location Setup Next Button
-    Click Element    accessibility_id=setup_primary_button
+       Click Element    accessibility_id=setup_primary_button

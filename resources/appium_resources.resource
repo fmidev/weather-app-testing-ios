@@ -1,6 +1,10 @@
 *** Keywords ***
 Set Appium Capabilities
     [Arguments]    ${platform_version}=%{IOS_VERSION}    ${device_name}=%{DEVICE_NAME}    ${device_id}=%{UDID}    ${app}=${APP_PACKAGE}
+    Log    ${platform_version}
+    Log    ${device_name}
+    Log    ${device_id}
+    Log    ${app}
     TRY
         Open Application    ${APPIUM_SERVER}
         ...    platformName=iOS
@@ -9,7 +13,7 @@ Set Appium Capabilities
         ...    udid=${device_id}
         ...    automationName=XCUITest
         ...    app=${app}
-        ...    appium:wdaLaunchTimeout=${170000}
+        ...    appium:wdaLaunchTimeout=${180000}
     EXCEPT    ProtocolError: *    type=GLOB
         Start Appium Server
         Open Application    ${APPIUM_SERVER}
