@@ -34,7 +34,6 @@ Select ${selection} From Grant Locating Alert
     EXCEPT
         Click Location Setup Next Button
         Click Location Alert Button    ${selection}
-        END
     END
     
 Click Location Alert Button
