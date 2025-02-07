@@ -5,7 +5,7 @@ Open Weather View
     Wait Until Element Is Visible       accessibility_id=info_button
 
 Verify Forecast Time
-    ${next_hour}=    Get Next Full Hour
+    ${next_hour}=    Get Next Full Hour With Timezone
     Wait Until Page Contains Element    accessibility_id=Forecast at ${next_hour}
 
 Verify Forecast Length
@@ -15,7 +15,7 @@ Verify Forecast Length
 Verify ${view_type} Is Active
     [Arguments]    ${length}
     IF    '${view_type}'=='Table'
-        ${next_hour}=    Get Next Full Hour    %H
+        ${next_hour}=    Get Next Full Hour With Timezone    time_format=%H
         Wait Until Element Is Visible    xpath=//XCUIElementTypeOther[@name="${length}-day forecast"]/following-sibling::XCUIElementTypeOther[starts-with(@name,"m/s mm at ${next_hour}.")]
     ELSE IF    '${view_type}'=='Graph'
         Wait Until Element Is Visible    accessibility_id=chart_temperature
