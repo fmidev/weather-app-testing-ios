@@ -66,6 +66,7 @@ jobs:
           pip install robotframework-appiumlibrary
           pip install robotframework-seleniumlibrary
           pip install Appium-Python-Client
+          pip install pytz
           
       # Step 11: Install Appium
       - name: Install Appium
