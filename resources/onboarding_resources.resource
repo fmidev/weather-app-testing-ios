@@ -71,3 +71,8 @@ Click Accept Button
 
 Click Location Setup Next Button
        Click Element    accessibility_id=setup_primary_button
+
+Click Onboarding Skip Button
+    Wait Until Element Is Visible    accessibility_id=onboarding_skip_button    timeout=10
+    Click Element    accessibility_id=onboarding_skip_button
+    Wait Until Page Does Not Contain Element    accessibility_id=onboarding_skip_button
