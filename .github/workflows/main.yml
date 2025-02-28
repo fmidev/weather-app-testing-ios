@@ -18,7 +18,9 @@ jobs:
     steps:
       # Step 1: Checkout the current repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          submodules: true
 
       # Step 2: Setup node
       - name: Use Node.js ${{ matrix.node-version }}
@@ -78,7 +80,7 @@ jobs:
       # Step 12: Clone repository
       - name: Clone Weather App Repository
         run: |
-          git clone https://github.com/fmidev/weather-app.git
+          git clone --recurse-submodules https://github.com/fmidev/weather-app.git
           echo "Repository cloned successfully"
 
       # Step 13: Install Yarn
