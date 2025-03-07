@@ -2,6 +2,7 @@
 Open Weather View
     Wait Until Page Contains Element    accessibility_id=navigation_weather
     Click Element                       accessibility_id=navigation_weather
+    Swipe Down    ${2}
     Wait Until Element Is Visible       accessibility_id=info_button
 
 Verify Forecast Time
@@ -13,7 +14,7 @@ Verify Forecast Length
     Wait Until Page Contains Element    accessibility_id=${length}-day forecast
     
 Verify ${view_type} Is Active
-    [Arguments]    ${length}
+    [Arguments]    ${length}=10
     IF    '${view_type}'=='Table'
         ${next_hour}=    Get Next Full Hour With Timezone    time_format=%H
         Wait Until Element Is Visible    xpath=//XCUIElementTypeOther[@name="${length}-day forecast"]/following-sibling::XCUIElementTypeOther[starts-with(@name,"m/s mm at ${next_hour}.")]
@@ -39,3 +40,10 @@ Click Weather View Button
     [Arguments]    ${button_name}
     Wait Until Element Is Visible    xpath=//XCUIElementTypeButton[@name="${button_name}"]
     Click Element    xpath=//XCUIElementTypeButton[@name="${button_name}"]
+    
+Set Default Weather View
+    Open Weather View
+    Swipe Down    ${2}
+    Click Weather View Button    ${FORECAST_TABLE_BUTTON_NAME}
+    Verify Table Is Active
+    Set New Location From Search View    Helsinki

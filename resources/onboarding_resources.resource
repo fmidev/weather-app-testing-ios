@@ -76,3 +76,22 @@ Click Onboarding Skip Button
     Wait Until Element Is Visible    accessibility_id=onboarding_skip_button    timeout=10
     Click Element    accessibility_id=onboarding_skip_button
     Wait Until Page Does Not Contain Element    accessibility_id=onboarding_skip_button
+
+Run Skipped Onboarding Process
+    Weather Forecast And Observations Onboarding Title Is Visible    ${OB_WFO_TITLE_EN}
+    Click Onboarding Skip Button
+    Accept Button Should Be Disabled
+    Click Terms Of Use Button
+    Click Close Button From Terms Of Use View
+    Click Accept Button
+    Location Setup Title Is Visible    ${OB_LOC_TITLE_EN}
+    Click Location Setup Next Button
+    Select Allow While Using App From Grant Locating Alert
+
+Pass Onboarding Process If It Does Not Exist
+    No Operation
+
+Return Onboarding View Status
+    Sleep    6
+    ${is_onboarding_view}=    Run Keyword And Return Status    Page Should Contain Element    accessibility_id=onboarding_skip_button
+    RETURN    ${is_onboarding_view}

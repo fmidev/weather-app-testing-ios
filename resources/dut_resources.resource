@@ -9,9 +9,10 @@ Stop Yarn
     Process Should Be Stopped    yarn_process
 
 Start Simulator
-    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME_LOCAL_3}"    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
+    Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME_LOCAL_1}"    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
     Wait For Process    simulator_process    timeout=180
     Process Should Be Running    simulator_process
+#    Sleep    150
 
 Stop Simulator
     Run Process    killall    Simulator    alias=kill_simulator
@@ -20,23 +21,37 @@ Stop Simulator
     Process Should Be Stopped    simulator_process
 
 Start Simulator And Appium With App
-    [Arguments]    ${platform_version}=${IOS_VERSION_LOCAL_3}    ${device_name}=${DEVICE_NAME_LOCAL_3}    ${device_id}=${DEVICE_ID_LOCAL_3}
-    Start Appium Server
+    [Arguments]    ${platform_version}=${IOS_VERSION_LOCAL_1}    ${device_name}=${DEVICE_NAME_LOCAL_1}    ${device_id}=${DEVICE_ID_LOCAL_1}
     Start Yarn
     Start Simulator
+    Start Appium Server
     Set Appium Capabilities    ${platform_version}    ${device_name}    ${device_id}
     Switch Process    simulator_process
-    
+
 Test Setup Actions
+    ${is_onboarding_view}=    Return Onboarding View Status
+    IF    ${is_onboarding_view}==${FALSE}
+        Pass Onboarding Process If It Does Not Exist
+    ELSE
+        Run Skipped Onboarding Process
+    END
+    
+Suite Setup Actions
     ${is_ci_env}=    Verify Environment
     IF    ${is_ci_env}==${TRUE}
         Set Appium Capabilities
     ELSE IF    ${is_ci_env}==${FALSE}
         Import Variables    ${CURDIR}/../variables/config_variables.py
         Start Simulator And Appium With App
+#        ${is_onboarding_view}=    Return Onboarding View Status
+#        IF    ${is_onboarding_view}==${FALSE}
+#            Pass Onboarding Process If It Does Not Exist
+#        ELSE
+#            Run Skipped Onboarding Process
+#        END
     END
 
-Test Teardown Actions
+Suite Teardown Actions
     ${is_ci_env}=    Verify Environment
     IF    ${is_ci_env}==${TRUE}
         No Operation
@@ -48,3 +63,15 @@ Verify Environment
     ${env_variables_dict}=    Get Environment Variables
     ${status}=    Get Status Is Key Found In Dictionary    ${env_variables_dict}    CI_ENV
     RETURN    ${status}
+    
+Swipe Down
+    [Arguments]    ${how_many_swipes}    ${start_x}=50    ${start_y}=20    ${end_x}=50    ${end_y}=80    ${duration}=1500
+    FOR    ${index}    IN RANGE    ${how_many_swipes} + 1
+        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    END
+
+Swipe Up
+    [Arguments]    ${how_many_swipes}    ${start_x}=50    ${start_y}=80    ${end_x}=50    ${end_y}=20    ${duration}=1500
+    FOR    ${index}    IN RANGE    ${how_many_swipes} + 1
+        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    END

@@ -10,11 +10,13 @@ Resource         ../resources/appium_resources.resource
 Resource         ../resources/dut_resources.resource
 Resource         ../resources/process_resources.resource
 Resource         ../resources/onboarding_resources.resource
+Resource         ../resources/weather_view_resources.resource
 Variables        ../variables/appium_setup_variables.py
 Variables        ../variables/onboarding_variables.py
 Variables        ../variables/dut_variables.py
-Test Setup        Test Setup Actions
-Test Teardown     Run Keyword If Test Failed    Test Teardown Actions
+Variables        ../variables/weather_view_variables.py
+Suite Setup      Suite Setup Actions
+Suite Teardown   Suite Teardown Actions
 
 *** Test Cases ***
 Open Mobile Weather App With Full Onboarding Successfully
@@ -45,4 +47,3 @@ Open Mobile Weather App With Full Onboarding Successfully
     Click Location Setup Next Button
     Select Allow While Using App From Grant Locating Alert
     Verify Location Text From Upper Bar    ${DEFAULT_LOCATION}
-    Terminate All Processes Gracefully    simulator_process    appium_server_process    yarn_process

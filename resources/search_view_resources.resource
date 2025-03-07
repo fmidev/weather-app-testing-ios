@@ -14,7 +14,8 @@ Select From Location Search Results
     Click Element    xpath=//XCUIElementTypeButton[@name="${location}"]
     Verify Location Text From Upper Bar    ${location}
 
-
-
-
-
+Set New Location From Search View
+    [Arguments]    ${location}
+    Open Search View
+    Enter Search Location    ${location}
+    Select From Location Search Results    ${location}
