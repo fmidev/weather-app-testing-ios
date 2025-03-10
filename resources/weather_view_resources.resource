@@ -16,8 +16,10 @@ Verify Forecast Length
 Verify ${view_type} Is Active
     [Arguments]    ${length}=10
     IF    '${view_type}'=='Table'
-        ${next_hour}=    Get Next Full Hour With Timezone    time_format=%H
-        Wait Until Element Is Visible    xpath=//XCUIElementTypeOther[@name="${length}-day forecast"]/following-sibling::XCUIElementTypeOther[starts-with(@name,"m/s mm at ${next_hour}.")]
+        ${forecast_timezone_locator_name_attribute}=    Get Element Attribute    xpath=//XCUIElementTypeButton[@name="Locate"]/../following-sibling::XCUIElementTypeOther[1]    name
+        ${current_timezone}=    Fetch From Right    ${forecast_timezone_locator_name_attribute}    Time zone:${SPACE}
+        ${current_timezone_next_hour}=    Get Next Full Hour With Timezone    time_zone=${current_timezone}    time_format=%H
+        Wait Until Element Is Visible    xpath=//XCUIElementTypeOther[@name="${length}-day forecast"]/following-sibling::XCUIElementTypeOther[starts-with(@name,"m/s mm at ${current_timezone_next_hour}.")]
     ELSE IF    '${view_type}'=='Graph'
         Wait Until Element Is Visible    accessibility_id=chart_temperature
     END
