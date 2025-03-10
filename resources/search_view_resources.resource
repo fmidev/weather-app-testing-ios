@@ -6,6 +6,7 @@ Open Search View
 
 Enter Search Location
     [Arguments]    ${location}
+    Clear Text    xpath=(//XCUIElementTypeOther[@name="Enter location..."])[1]
     Input Text    xpath=(//XCUIElementTypeOther[@name="Enter location..."])[1]    ${location}
 
 Select From Location Search Results
