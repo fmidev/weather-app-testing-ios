@@ -12,7 +12,6 @@ Start Simulator
     Start Process    npx    react-native    run-ios    --simulator\="${DEVICE_NAME_LOCAL_1}"    stdout=${CURDIR}/../stdout/simulator_stdout.txt    stderr=${CURDIR}/../stdout/simulator_stderr.txt    alias=simulator_process
     Wait For Process    simulator_process    timeout=180
     Process Should Be Running    simulator_process
-#    Sleep    150
 
 Stop Simulator
     Run Process    killall    Simulator    alias=kill_simulator
@@ -43,12 +42,6 @@ Suite Setup Actions
     ELSE IF    ${is_ci_env}==${FALSE}
         Import Variables    ${CURDIR}/../variables/config_variables.py
         Start Simulator And Appium With App
-#        ${is_onboarding_view}=    Return Onboarding View Status
-#        IF    ${is_onboarding_view}==${FALSE}
-#            Pass Onboarding Process If It Does Not Exist
-#        ELSE
-#            Run Skipped Onboarding Process
-#        END
     END
 
 Suite Teardown Actions
