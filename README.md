@@ -46,6 +46,16 @@
 
 - Clone test environment: https://github.com/fmidev/weather-app-testing-ios.git
 - Before run make sure you have valid DefaultConfig.ts and WidgetConfig.ts in weather-app directory
+- Create config_variables.py file to weather-app-testing-ios/variables folder. Folder should contain variables which represents local simulator or device and variable defining local yarn path:
+
+  IOS_VERSION_LOCAL_1 = 'Here iOS platform version of the local device or simulator under test. E.g. 18.1'
+
+  DEVICE_NAME_LOCAL_1 = 'Here name of the local device or simulator under test. E.g. iPhone 16 Pro'
+
+  DEVICE_ID_LOCAL_1 = 'Here device id of the local device or simulator under test. E.g. 0888C6D3-22A1-2C41-8FB2-1C3BD6DD1501'
+
+  CONFIG_YARN_PATH = 'Here yarn start path. E.g. $HOME//weather-app'
+
 - `cd weather-app-testing-ios`
 - To run all tests use `robot tests/`
 - To run single test suite use `robot tests/test_suite_tests.robot`
